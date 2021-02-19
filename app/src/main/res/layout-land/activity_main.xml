@@ -4,5 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:id="@+id/listFragmentContainer"
+        android:layout_width="@dimen/layout_stretch"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toStartOf="@id/noteFragmentContainer"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/noteFragmentContainer"
+        android:layout_width="@dimen/layout_stretch"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/listFragmentContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
