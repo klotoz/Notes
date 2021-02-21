@@ -40,7 +40,6 @@ public class NoteFragment extends Fragment implements Observer {
         }
     }
 
-
     @Override
     public void openNote(Note note) {
         titleTextView.setText(note.getTitle());
