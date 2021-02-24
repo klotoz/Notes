@@ -5,15 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +18,9 @@ import java.util.List;
 
 public class NotesListFragment extends Fragment implements NoLiNot {
 
-    private final List<Observer> noteListObservers;
+    private List<Observer> noteListObservers;
     private ArrayList<Note> noteList;
+    private final NotesAdapter notesAdapter = new NotesAdapter(this::noteClicked);
     private static final String NOTE_LIST = "notes";
 
     public NotesListFragment() {
@@ -55,20 +53,19 @@ public class NotesListFragment extends Fragment implements NoLiNot {
         initList(view);
     }
 
-    private void initList(View view) {
-        LinearLayout layout = (LinearLayout) view;
-        for (Note note : noteList) {
-            TextView textView = new TextView(getContext());
-            textView.setText(note.getTitle());
-            textView.setTextSize(getResources().getDimension(R.dimen.t_title_size));
-            textView.setBackground(getResources().getDrawable(R.drawable.et_style));
-            float paddingH = getResources().getDimension(R.dimen.padding_h);
-            float paddingV = getResources().getDimension(R.dimen.padding_v);
-            textView.setPaddingRelative((int) paddingH, (int) paddingV, (int) paddingH, (int) paddingV);
-            layout.addView(textView);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        notesAdapter.setItems(noteList);
+    }
 
-            textView.setOnClickListener(view1 -> noteClicked(note));
-        }
+    private void initList(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.notes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.addItemDecoration(new NotesDecorator(getResources().getDimensionPixelSize(R.dimen.padding_h)));
+        recyclerView.setAdapter(notesAdapter);
+
+
     }
 
     @Override
