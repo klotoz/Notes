@@ -19,6 +19,7 @@ public class Note implements Parcelable {
     protected Note(Parcel in) {
         title = in.readString();
         desc = in.readString();
+        date = new Date(in.readLong());
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -63,5 +64,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(desc);
+        dest.writeLong(date.getTime());
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.notes;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,15 +14,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 
-public class NoteFragment extends Fragment implements Observer {
+
+public class NoteFragment extends Fragment implements Observer, DatePickerDialog.OnDateSetListener {
 
     private static final String NOTE = "note";
-    private TextView titleTextView;
-    private TextView descTextView;
+    private EditText titleEditText;
+    private EditText descEditText;
     private TextView dateTextView;
 
 
@@ -37,9 +42,9 @@ public class NoteFragment extends Fragment implements Observer {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        titleTextView = view.findViewById(R.id.tv_title);
-        descTextView = view.findViewById(R.id.tv_desc);
-        descTextView.setMovementMethod(new ScrollingMovementMethod());
+        titleEditText = view.findViewById(R.id.et_title);
+        descEditText = view.findViewById(R.id.et_desc);
+        descEditText.setMovementMethod(new ScrollingMovementMethod());
         dateTextView = view.findViewById(R.id.tv_date);
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -47,10 +52,23 @@ public class NoteFragment extends Fragment implements Observer {
         }
     }
 
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        dateTextView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                showDatePicker();
+                                            }
+                                        }
+        );
+    }
+
     @Override
     public void openNote(Note note) {
-        titleTextView.setText(note.getTitle());
-        descTextView.setText(note.getDesc());
+        titleEditText.setText(note.getTitle());
+        descEditText.setText(note.getDesc());
         dateTextView.setText(note.getDate());
     }
 
@@ -80,4 +98,19 @@ public class NoteFragment extends Fragment implements Observer {
         return super.onOptionsItemSelected(item);
     }
 
+    private void showDatePicker() {
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        new DatePickerDialog(getActivity(), this, year, month, day).show();
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = String.format("%s.%s.%s", dayOfMonth, month + 1, year);
+        dateTextView.setText(date);
+    }
 }
