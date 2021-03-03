@@ -7,26 +7,33 @@
     android:orientation="vertical"
     tools:context=".NoteFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_h"
+        android:layout_marginEnd="@dimen/padding_h"
         android:textSize="@dimen/text_title_size" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_h"
+        android:layout_marginEnd="@dimen/padding_h"
+        android:drawableRight="@drawable/ic_action_cal" />
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="@dimen/stroke"
         android:background="@drawable/et_style" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_desc"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_h"
+        android:layout_marginEnd="@dimen/padding_h"
         android:scrollbars="vertical"
         android:textSize="@dimen/text_desc_size" />
 
