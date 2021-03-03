@@ -1,11 +1,11 @@
 package com.example.notes;
 
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -17,9 +17,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private final List<Note> noteList = new ArrayList<>();
     private final Observer observer;
+    private final Fragment fragment;
 
-    public NotesAdapter(Observer observer) {
+    public NotesAdapter(Observer observer, Fragment fragment) {
         this.observer = observer;
+        this.fragment = fragment;
     }
 
 
@@ -54,12 +56,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.item_title);
+            registerContextMenu(itemView);
         }
 
         public void onBind(Note model, int position) {
             textView.setText(model.getTitle());
             itemView.setOnClickListener(v -> observer.openNote(model));
 
+        }
+    }
+
+    private void registerContextMenu(View itemView) {
+        if (fragment != null) {
+            fragment.registerForContextMenu(itemView);
         }
     }
 

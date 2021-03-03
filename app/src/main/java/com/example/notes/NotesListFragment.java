@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,7 @@ public class NotesListFragment extends Fragment implements NoLiNot {
 
     private List<Observer> noteListObservers;
     private ArrayList<Note> noteList;
-    private final NotesAdapter notesAdapter = new NotesAdapter(this::noteClicked);
+    private final NotesAdapter notesAdapter = new NotesAdapter(this::noteClicked, this);
     private static final String NOTE_LIST = "notes";
 
     public NotesListFragment() {
@@ -83,6 +87,26 @@ public class NotesListFragment extends Fragment implements NoLiNot {
         for (Observer noteListObserver : noteListObservers) {
             noteListObserver.openNote(note);
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = requireActivity().getMenuInflater();
+        inflater.inflate(R.menu.note_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_update:
+                Toast.makeText(getContext(), "Редактируем заметку", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_delete:
+                Toast.makeText(getContext(), "Удаляем заметку", Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
 
