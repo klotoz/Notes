@@ -5,13 +5,15 @@
     <string name="settings">настройки</string>
     <string name="search">поиск</string>
     <string name="favorite">избранное</string>
-    <string name="add">main</string>
-    <string name="fragment_navigation">fragment_nav</string>
+    <string name="add">новая заметка</string>
+    <string name="Notes">fragment_nav</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="delete">удалить</string>
     <string name="setCh">редактировать</string>
     <string name="copy">копировать</string>
     <string name="send">переслать</string>
+    <string name="fragment_navigation">Notes</string>
+    <string name="continue_">Продолжить...</string>
 
 </resources>

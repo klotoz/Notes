@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".NoteFragment">
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_title"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_note_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Название" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_note_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_h"
-        android:layout_marginEnd="@dimen/padding_h"
-        android:textSize="@dimen/text_title_size" />
+        android:layout_margin="16dp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_date"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_note_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="Содержание"
+            android:minLines="5" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_note_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_h"
-        android:layout_marginEnd="@dimen/padding_h"
-        android:drawableRight="@drawable/ic_action_cal" />
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/stroke"
-        android:background="@drawable/et_style" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_h"
-        android:layout_marginEnd="@dimen/padding_h"
-        android:scrollbars="vertical"
-        android:textSize="@dimen/text_desc_size" />
-
+        android:layout_margin="16dp"
+        android:text="редактировать" />
 
 </LinearLayout>
 

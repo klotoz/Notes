@@ -1,4 +1,4 @@
-package com.example.notes;
+package com.example.notes.notelist.adapter;
 
 import android.graphics.Rect;
 import android.view.View;
