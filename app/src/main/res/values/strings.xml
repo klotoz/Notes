@@ -14,5 +14,6 @@
     <string name="copy">копировать</string>
     <string name="send">переслать</string>
     <string name="fragment_navigation">Notes</string>
+    <string name="continue_">Продолжить...</string>
 
 </resources>

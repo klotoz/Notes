@@ -7,10 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -35,6 +32,10 @@ public class NotesListFragment extends Fragment implements NoteAdapterCallbacks,
     private final NoteAdapter adapter = new NoteAdapter(new NoteItemCallback(), this);
     private final List<NoteModel> noteModelList = new ArrayList<>();
     private final NotesListRepository repository = new NotesListRepositoryImpl(this);
+
+    public static NotesListFragment newInstance() {
+        return new NotesListFragment();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

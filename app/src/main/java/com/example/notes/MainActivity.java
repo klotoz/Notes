@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 
 import android.os.Bundle;
@@ -16,23 +15,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.notes.notelist.NotesListFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Navigation navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_container);
         Toolbar toolbar = initToolbar();
+        navigation = new Navigation(getSupportFragmentManager());
         initDrawer(toolbar);
-        if (savedInstanceState == null) {
-            Fragment fragment = new NotesListFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.layout_container, fragment)
-                    .commit();
+        if (savedInstanceState == null){
+            getNavigation().addFragment(AuthFragment.newInstance(), false);
         }
     }
 
@@ -102,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
+    }
+
+    public Navigation getNavigation() {
+        return navigation;
     }
 }
 
