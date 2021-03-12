@@ -15,5 +15,8 @@
     <string name="send">переслать</string>
     <string name="fragment_navigation">Notes</string>
     <string name="continue_">Продолжить...</string>
+    <string name="ad_title">Предупреждение</string>
+    <string name="ad_desc">Вы точно хотите удалить заметку?</string>
+    <string name="ad_btn">Подтвердить</string>
 
 </resources>

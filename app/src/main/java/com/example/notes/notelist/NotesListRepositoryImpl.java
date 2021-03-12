@@ -6,6 +6,7 @@ import com.example.notes.Constants;
 import com.example.notes.model.NoteModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -48,6 +49,12 @@ public class NotesListRepositoryImpl implements NotesListRepository {
         firebaseFirestore
                 .collection(Constants.TABLE_NAME_NOTES)
                 .document(id)
-                .delete();
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        requestNotes();
+                    }
+                });
     }
 }
