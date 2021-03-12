@@ -1,5 +1,7 @@
 package com.example.notes.notelist;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NotesListFragment extends Fragment implements NoteAdapterCallbacks, NotesFirestoreCallbacks {
+public class NotesListFragment extends Fragment implements NoteAdapterCallbacks, NotesFirestoreCallbacks, NoteBottomSheetFragment.OnClickListener {
 
     private RecyclerView recyclerView;
     private FloatingActionButton btnAdd;
@@ -79,13 +81,11 @@ public class NotesListFragment extends Fragment implements NoteAdapterCallbacks,
 
     @Override
     public void onLongItemClicked(int position) {
-
-        Toast.makeText(getContext(), "удаляем", Toast.LENGTH_SHORT).show();
         NoteModel model = noteModelList.get(position);
-        repository.onDeleteClicked(model.getId());
+        new NoteBottomSheetFragment().create(model).show(getChildFragmentManager(), null);
     }
 
-    private void replaceFragment(@Nullable NoteModel model) {
+    public void replaceFragment(@Nullable NoteModel model) {
         Fragment fragment = NoteFragment.newInstance(model);
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -113,5 +113,10 @@ public class NotesListFragment extends Fragment implements NoteAdapterCallbacks,
         if (message != null) {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onTitleClicked(String title) {
+        showToast(title);
     }
 }
